@@ -1,13 +1,171 @@
 ---
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { projects } from "../data/projects";
+
+const sorted = [...projects].sort((a, b) => {
+  if (b.year !== a.year) return b.year - a.year; // newest first
+  return a.title.localeCompare(b.title); // alphabetical if same year
+});
+
+const base = import.meta.env.BASE_URL;
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>My Portfolio</title>
-  </head>
-  <body class="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center">
-    <h1 class="text-4xl font-bold tracking-tight">Astro + Tailwind ✅</h1>
-  </body>
-</html>
+
+<BaseLayout title="Aaron Cannon | Portfolio">
+  <!-- Hero -->
+  <section class="border-b border-zinc-800/60">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <p class="text-sm uppercase tracking-widest text-zinc-400">Portfolio</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
+        Aaron Cannon
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-zinc-300">
+        Computer Games Design Student
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="#projects"
+          class="rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-white"
+        >
+          View Projects
+        </a>
+        <a
+          href={`${base}cv`}
+          class="rounded-md border border-zinc-700 bg-zinc-900/30 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-900"
+        >
+          View CV
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="border-b border-zinc-800/60">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <div class="flex items-end justify-between gap-6">
+        <div>
+          <h2 class="text-2xl font-semibold tracking-tight">Projects</h2>
+          <p class="mt-2 text-zinc-300">
+            This is a collection of my projects, click "Read More" for an in depth breakdown of each project.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {sorted.map((p) => (
+          <article class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/35">
+            <div class="aspect-[16/10] overflow-hidden border-b border-zinc-800">
+              <img
+                src={p.imageUrl}
+                alt={`Screenshot from ${p.title}`}
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-3">
+                <h3 class="text-lg font-semibold leading-snug">{p.title}</h3>
+                <span class="shrink-0 rounded-md border border-zinc-700 bg-zinc-950/30 px-2 py-1 text-xs text-zinc-300">
+                  {p.year}
+                </span>
+              </div>
+
+              <dl class="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                <div>
+                  <dt class="text-zinc-400">Engine</dt>
+                  <dd class="text-zinc-200">{p.engine}</dd>
+                </div>
+                <div>
+                  <dt class="text-zinc-400">Team</dt>
+                  <dd class="text-zinc-200">{p.team}</dd>
+                </div>
+                <div>
+                  <dt class="text-zinc-400">Type</dt>
+                  <dd class="text-zinc-200">{p.type}</dd>
+                </div>
+                <div class="col-span-2">
+                  <dt class="text-zinc-400">Role</dt>
+                  <dd class="text-zinc-200">{p.role}</dd>
+                </div>
+              </dl>
+
+              <p class="mt-4 text-sm text-zinc-300">
+                {p.summary}
+              </p>
+
+              <div class="mt-6">
+                <a
+                  class="inline-flex items-center gap-2 rounded-md border border-zinc-700 bg-zinc-950/30 px-3 py-2 text-sm font-medium hover:bg-zinc-950/60"
+                  href={`${base}projects/${p.slug}`}
+                >
+                  Read More
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="border-b border-zinc-800/60">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">About Me</h2>
+      <div class="mt-4 max-w-3xl space-y-4 text-zinc-300">
+        <p>
+          [Placeholder] Write a short introduction about who you are and what kinds of games you enjoy making.
+        </p>
+        <p>
+          [Placeholder] Mention your interests (e.g., gameplay programming, level design, narrative, UI, tools, etc.).
+        </p>
+        <p>
+          [Placeholder] Highlight strengths and skills (engines, languages, teamwork, problem-solving).
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <h3 class="font-semibold">Strengths</h3>
+          <p class="mt-2 text-sm text-zinc-300">[Placeholder list]</p>
+        </div>
+        <div class="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <h3 class="font-semibold">Skills</h3>
+          <p class="mt-2 text-sm text-zinc-300">[Placeholder list]</p>
+        </div>
+        <div class="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <h3 class="font-semibold">Interests</h3>
+          <p class="mt-2 text-sm text-zinc-300">[Placeholder list]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-2xl font-semibold tracking-tight">Contact</h2>
+      <p class="mt-2 text-zinc-300">
+        You can contact me using the details below.
+      </p>
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <p class="text-sm text-zinc-400">Email</p>
+          <a class="mt-1 inline-block font-medium hover:underline" href="mailto:aaroncannon151@hotmail.com">
+            aaroncannon151@hotmail.com
+          </a>
+        </div>
+
+        <div class="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5">
+          <p class="text-sm text-zinc-400">Phone</p>
+          <a class="mt-1 inline-block font-medium hover:underline" href="tel:+4407305731452">
+            +44 07305 731452
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

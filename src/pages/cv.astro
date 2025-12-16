@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+
+// Put your CV PDF here: /public/cv/Aaron_Cannon_CV.pdf
+const cvUrl = `${base}cv/Aaron_Cannon_CV.pdf`;
+---
+
+<BaseLayout title="CV | Aaron Cannon">
+  <section>
+    <div class="mx-auto max-w-6xl px-4 py-12">
+      <h1 class="text-3xl font-semibold tracking-tight">Curriculum Vitae</h1>
+      <p class="mt-2 text-zinc-300">
+        View online or download a copy.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a
+          class="rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 hover:bg-white"
+          href={cvUrl}
+          download
+        >
+          Download CV (PDF)
+        </a>
+        <a
+          class="rounded-md border border-zinc-700 bg-zinc-900/30 px-4 py-2 text-sm font-medium text-zinc-100 hover:bg-zinc-900"
+          href={cvUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open in New Tab
+        </a>
+      </div>
+
+      <div class="mt-8 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20">
+        <iframe
+          title="Aaron Cannon CV"
+          src={cvUrl}
+          class="h-[75vh] w-full"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
