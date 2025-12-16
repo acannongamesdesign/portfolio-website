@@ -54,7 +54,7 @@ const sorted = [...projects].sort((a, b) => {
 						<article class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/35">
 							<div class="aspect-16/10 overflow-hidden border-b border-zinc-800">
 								<img
-									src={p.data.coverImage}
+									src={`${base}${p.data.coverImage.replace(/^\/+/, '')}`}
 									alt={`Screenshot from ${p.data.title}`}
 									class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
 								/>
@@ -162,7 +162,9 @@ const sorted = [...projects].sort((a, b) => {
 						</li>
 						<li class="flex gap-2">
 							<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-500"
-							></span><span>Readable level layouts that teach mechanics naturally</span>
+							></span><span
+								>Readable level layouts that teach mechanics naturally</span
+							>
 						</li>
 					</ul>
 				</div>
