@@ -1,39 +1,37 @@
 @config "../../tailwind.config.mjs";
-@import 'tailwindcss';
+@import "tailwindcss";
 
 :root {
-	color-scheme: dark;
+  color-scheme: dark;
 }
 
 html {
-	scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 @layer base {
-	.prose :where(a):not(:where([class~='not-prose'] *)) {
-		@apply text-zinc-100 underline underline-offset-4 decoration-zinc-600 hover:decoration-zinc-300;
-	}
+  /* Prose (markdown) styling */
+  .prose :where(a):not(:where([class~="not-prose"] *)) {
+    @apply text-zinc-100 underline underline-offset-4 decoration-zinc-600 hover:decoration-zinc-300;
+  }
 
-	.prose :where(code):not(:where([class~='not-prose'] *)) {
-		@apply rounded bg-zinc-900/60 px-1 py-0.5 text-zinc-100;
-	}
+  .prose :where(code):not(:where([class~="not-prose"] *)) {
+    @apply rounded bg-zinc-900/60 px-1 py-0.5 text-zinc-100;
+  }
 
-	.prose :where(pre):not(:where([class~='not-prose'] *)) {
-		@apply border border-zinc-800 bg-zinc-950/40;
-	}
+  .prose :where(pre):not(:where([class~="not-prose"] *)) {
+    @apply border border-zinc-800 bg-zinc-950/40;
+  }
 
-	.prose :where(blockquote):not(:where([class~='not-prose'] *)) {
-		@apply border-zinc-700 text-zinc-300;
-	}
-}
+  .prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+    @apply border-zinc-700 text-zinc-300;
+  }
 
-@layer base {
+  /* Scroll reveal */
   .reveal {
     opacity: 0;
     transform: translateY(14px);
-    transition:
-      opacity 600ms ease,
-      transform 600ms ease;
+    transition: opacity 600ms ease, transform 600ms ease;
     transition-delay: var(--reveal-delay, 0ms);
     will-change: opacity, transform;
   }
@@ -43,13 +41,7 @@ html {
     transform: none;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
-  }
+  /* Buttons */
   .btn {
     @apply inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium;
   }
@@ -60,5 +52,81 @@ html {
 
   .btn-solid {
     @apply bg-zinc-100 text-zinc-950 hover:bg-white;
+  }
+
+  /* Subtle site background */
+  .bg-site {
+    background-color: rgb(9 9 11); /* zinc-950-ish */
+    position: relative;
+  }
+
+  /* Soft glow */
+  .bg-site::before {
+    content: "";
+    position: fixed;
+    inset: -20vh -20vw;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(700px circle at 20% 10%, rgba(255, 255, 255, 0.06), transparent 60%),
+      radial-gradient(600px circle at 80% 20%, rgba(255, 255, 255, 0.04), transparent 55%),
+      radial-gradient(900px circle at 60% 90%, rgba(255, 255, 255, 0.03), transparent 60%);
+  }
+
+  /* Subtle grid */
+  .bg-site::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.12;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 64px);
+    -webkit-mask-image: radial-gradient(circle at 50% 15%, black 0%, transparent 70%);
+    mask-image: radial-gradient(circle at 50% 15%, black 0%, transparent 70%);
+  }
+
+  .nav-link {
+    position: relative;
+    }
+
+    .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .nav-link.is-active {
+    color: rgb(244 244 245); /* zinc-100 */
+    }
+
+    .nav-link.is-active::after {
+    transform: scaleX(1);
+    opacity: 1;
+    }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .bg-site::before,
+    .bg-site::after {
+      transition: none;
+      animation: none;
+    }
   }
 }
