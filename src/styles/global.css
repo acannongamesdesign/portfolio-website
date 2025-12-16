@@ -26,3 +26,39 @@ html {
 		@apply border-zinc-700 text-zinc-300;
 	}
 }
+
+@layer base {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium;
+  }
+
+  .btn-outline {
+    @apply border border-zinc-700 bg-zinc-900/30 text-zinc-100 hover:bg-zinc-900;
+  }
+
+  .btn-solid {
+    @apply bg-zinc-100 text-zinc-950 hover:bg-white;
+  }
+}

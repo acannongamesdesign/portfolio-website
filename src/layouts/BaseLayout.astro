@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import revealScript from '../scripts/reveal.ts?url';
+import { ClientRouter, fade } from 'astro:transitions';
 
 const {
 	title = 'Aaron Cannon | Portfolio',
@@ -8,8 +10,9 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate="none">
 	<head>
+		<ClientRouter />
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={description} />
@@ -21,6 +24,7 @@ const {
 
 		<title>{title}</title>
 	</head>
+
 	<body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
 		<a
 			href="#content"
@@ -61,7 +65,7 @@ const {
 			</div>
 		</header>
 
-		<main id="content">
+		<main id="content" transition:animate={fade({ duration: '140ms' })}>
 			<slot />
 		</main>
 
@@ -70,5 +74,5 @@ const {
 				© {new Date().getFullYear()} Aaron Cannon
 			</div>
 		</footer>
-	</body>
+	</body><script type="module" src={revealScript}></script>
 </html>

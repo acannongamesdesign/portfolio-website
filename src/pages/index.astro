@@ -50,8 +50,12 @@ const sorted = [...projects].sort((a, b) => {
 
 			<div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{
-					sorted.map((p) => (
-						<article class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/35">
+					sorted.map((p, i) => (
+						<article
+							class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/35 reveal transition-transform duration-200 hover:-translate-y-1"
+							data-reveal
+							style={`--reveal-delay:${i * 70}ms`}
+						>
 							<div class="aspect-16/10 overflow-hidden border-b border-zinc-800">
 								<img
 									src={`${base}${p.data.coverImage.replace(/^\/+/, '')}`}
