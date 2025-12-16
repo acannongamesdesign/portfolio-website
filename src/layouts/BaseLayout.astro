@@ -1,7 +1,5 @@
 ---
 import '../styles/global.css';
-import revealScript from '../scripts/reveal.ts?url';
-import navProgressScript from '../scripts/navProgress.ts?url';
 import { ClientRouter, fade } from 'astro:transitions';
 
 const {
@@ -90,7 +88,7 @@ const {
 				© {new Date().getFullYear()} Aaron Cannon
 			</div>
 		</footer>
-		<script type="module" src={navProgressScript}></script>
-		<script type="module" src={revealScript}></script>
+		<script src="../scripts/navProgress.ts"></script>
+		<script src="../scripts/reveal.ts"></script>
 	</body>
 </html>
