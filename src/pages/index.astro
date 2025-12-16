@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { projects } from '../data/projects';
-
-const sorted = [...projects].sort((a, b) => {
-	if (b.year !== a.year) return b.year - a.year; // newest first
-	return a.title.localeCompare(b.title); // alphabetical if same year
-});
+import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL.endsWith('/')
 	? import.meta.env.BASE_URL
 	: import.meta.env.BASE_URL + '/';
+
+const projects = await getCollection('projects');
+
+const sorted = [...projects].sort((a, b) => {
+	if (b.data.year !== a.data.year) return b.data.year - a.data.year;
+	return a.data.title.localeCompare(b.data.title);
+});
 ---
 
 <BaseLayout title="Aaron Cannon | Portfolio">
@@ -44,65 +46,67 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 	<!-- Projects -->
 	<section id="projects" class="border-b border-zinc-800/60">
 		<div class="mx-auto max-w-6xl px-4 py-16">
-			<div class="flex items-end justify-between gap-6">
-				<div>
-					<h2 class="text-2xl font-semibold tracking-tight">Projects</h2>
-					<p class="mt-2 text-zinc-300">
-						This is a collection of my projects, click "Read More" for an in
-						depth breakdown of each project.
-					</p>
-				</div>
-			</div>
+			<h2 class="text-2xl font-semibold tracking-tight">Projects</h2>
 
 			<div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 				{
 					sorted.map((p) => (
 						<article class="group overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/35">
-							<div class="aspect-[16/10] overflow-hidden border-b border-zinc-800">
+							<div class="aspect-16/10 overflow-hidden border-b border-zinc-800">
 								<img
-									src={p.imageUrl}
-									alt={`Screenshot from ${p.title}`}
+									src={p.data.coverImage}
+									alt={`Screenshot from ${p.data.title}`}
 									class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-									loading="lazy"
 								/>
 							</div>
 
 							<div class="p-5">
 								<div class="flex items-start justify-between gap-3">
-									<h3 class="text-lg font-semibold leading-snug">{p.title}</h3>
+									<h3 class="text-lg font-semibold leading-snug">
+										{p.data.title}
+									</h3>
 									<span class="shrink-0 rounded-md border border-zinc-700 bg-zinc-950/30 px-2 py-1 text-xs text-zinc-300">
-										{p.year}
+										{p.data.year}
 									</span>
 								</div>
 
 								<dl class="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
 									<div>
-										<dt class="text-zinc-400">Engine</dt>
-										<dd class="text-zinc-200">{p.engine}</dd>
+										<>
+											<dt class="text-zinc-400">Engine</dt>
+											<dd class="text-zinc-200">{p.data.engine}</dd>
+										</>
 									</div>
 									<div>
-										<dt class="text-zinc-400">Team</dt>
-										<dd class="text-zinc-200">{p.team}</dd>
+										<>
+											<dt class="text-zinc-400">Team</dt>
+											<dd class="text-zinc-200">{p.data.team}</dd>
+										</>
 									</div>
 									<div>
-										<dt class="text-zinc-400">Type</dt>
-										<dd class="text-zinc-200">{p.type}</dd>
+										<>
+											<dt class="text-zinc-400">Type</dt>
+											<dd class="text-zinc-200">{p.data.type}</dd>
+										</>
 									</div>
 									<div class="col-span-2">
-										<dt class="text-zinc-400">Role</dt>
-										<dd class="text-zinc-200">{p.role}</dd>
+										<>
+											<dt class="text-zinc-400">Role</dt>
+											<dd class="text-zinc-200">{p.data.role}</dd>
+										</>
 									</div>
 								</dl>
 
-								<p class="mt-4 text-sm text-zinc-300">{p.summary}</p>
+								<p class="mt-4 text-sm text-zinc-300">
+									{p.data.summary}
+								</p>
 
 								<div class="mt-6">
 									<a
 										class="inline-flex items-center gap-2 rounded-md border border-zinc-700 bg-zinc-950/30 px-3 py-2 text-sm font-medium hover:bg-zinc-950/60"
 										href={`${base}projects/${p.slug}`}
 									>
-										Read More
-										<span aria-hidden="true">→</span>
+										Read More <span aria-hidden="true">→</span>
 									</a>
 								</div>
 							</div>

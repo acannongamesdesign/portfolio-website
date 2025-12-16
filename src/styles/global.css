@@ -1,9 +1,28 @@
-@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+@import 'tailwindcss';
 
 :root {
-    color-scheme: dark;
+	color-scheme: dark;
 }
 
 html {
-    scroll-behavior: smooth;
+	scroll-behavior: smooth;
+}
+
+@layer base {
+	.prose :where(a):not(:where([class~='not-prose'] *)) {
+		@apply text-zinc-100 underline underline-offset-4 decoration-zinc-600 hover:decoration-zinc-300;
+	}
+
+	.prose :where(code):not(:where([class~='not-prose'] *)) {
+		@apply rounded bg-zinc-900/60 px-1 py-0.5 text-zinc-100;
+	}
+
+	.prose :where(pre):not(:where([class~='not-prose'] *)) {
+		@apply border border-zinc-800 bg-zinc-950/40;
+	}
+
+	.prose :where(blockquote):not(:where([class~='not-prose'] *)) {
+		@apply border-zinc-700 text-zinc-300;
+	}
 }

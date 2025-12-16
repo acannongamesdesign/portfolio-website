@@ -1,19 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { projects } from '../../data/projects';
+import { getCollection } from 'astro:content';
 
-export function getStaticPaths() {
-	return projects.map((p) => ({
-		params: { slug: p.slug },
-		props: { project: p },
-	}));
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((p) => ({ params: { slug: p.slug } }));
 }
 
-const { project } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.endsWith('/')
+	? import.meta.env.BASE_URL
+	: import.meta.env.BASE_URL + '/';
+
+const projects = await getCollection('projects');
+const project = projects.find((p) => p.slug === Astro.params.slug);
+
+if (!project) throw new Error(`Project not found: ${Astro.params.slug}`);
+
+const { Content } = await project.render();
 ---
 
-<BaseLayout title={`${project.title} | Aaron Cannon`}>
+<BaseLayout title={`${project.data.title} | Aaron Cannon`}>
 	<section class="border-b border-zinc-800/60">
 		<div class="mx-auto max-w-6xl px-4 py-12">
 			<a
@@ -23,70 +29,47 @@ const base = import.meta.env.BASE_URL;
 				← Back to Projects
 			</a>
 
-			<div class="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start">
-				<div class="w-full lg:w-2/3">
-					<h1 class="text-3xl font-semibold tracking-tight">{project.title}</h1>
+			<h1 class="mt-6 text-3xl font-semibold tracking-tight">
+				{project.data.title}
+			</h1>
 
-					<div class="mt-4 flex flex-wrap gap-2 text-sm text-zinc-300">
-						<span
-							class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
-							>{project.year}</span
-						>
-						<span
-							class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
-							>{project.engine}</span
-						>
-						<span
-							class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
-							>{project.team}</span
-						>
-						<span
-							class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
-							>{project.type}</span
-						>
-						<span
-							class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
-							>{project.role}</span
-						>
-					</div>
+			<div class="mt-4 flex flex-wrap gap-2 text-sm text-zinc-300">
+				<span class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
+					>{project.data.year}</span
+				>
+				<span class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
+					>{project.data.engine}</span
+				>
+				<span class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
+					>{project.data.team}</span
+				>
+				<span class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
+					>{project.data.type}</span
+				>
+				<span class="rounded-md border border-zinc-700 bg-zinc-900/30 px-2 py-1"
+					>{project.data.role}</span
+				>
+			</div>
 
-					<div class="mt-8 space-y-4 text-zinc-300">
-						<p>[Placeholder] Overview of the project.</p>
-						<p>[Placeholder] Your responsibilities and what you contributed.</p>
-						<p>
-							[Placeholder] Tools/engine used, biggest challenges, and what you
-							learned.
-						</p>
-
-						<h2 class="mt-8 text-xl font-semibold text-zinc-100">Process</h2>
-						<p>[Placeholder] Pre-production → production → polish, etc.</p>
-
-						<h2 class="mt-8 text-xl font-semibold text-zinc-100">
-							Technical Breakdown
-						</h2>
-						<p>
-							[Placeholder] Systems you built, architecture, key mechanics, etc.
-						</p>
-
-						<h2 class="mt-8 text-xl font-semibold text-zinc-100">Gallery</h2>
-						<p>[Placeholder] Add screenshots / gifs later.</p>
-					</div>
+			<div class="mt-8 grid gap-8 lg:grid-cols-3">
+				<div class="lg:col-span-2 prose prose-invert max-w-none">
+					<Content />
 				</div>
 
-				<aside class="w-full lg:w-1/3">
+				<aside class="lg:col-span-1">
 					<div
 						class="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20"
 					>
-						<div class="aspect-[16/10] border-b border-zinc-800">
+						<div class="aspect-16/10 border-b border-zinc-800">
 							<img
-								src={project.imageUrl}
-								alt={`Screenshot from ${project.title}`}
+								src={project.data.coverImage}
+								alt={`Screenshot from ${project.data.title}`}
 								class="h-full w-full object-cover"
 							/>
 						</div>
 						<div class="p-5 text-sm text-zinc-300">
-							<p class="font-medium text-zinc-100">Project Summary</p>
-							<p class="mt-2">{project.summary}</p>
+							<p class="font-medium text-zinc-100">Summary</p>
+							<p class="mt-2">{project.data.summary}</p>
 						</div>
 					</div>
 				</aside>
