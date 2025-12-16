@@ -84,13 +84,13 @@ Coins were collectable and displayed between levels, but they didn’t have an a
 ## Gallery
 
 ### Main Menu
-![Deathtrap Dungeon main menu screen with controls shown.](/images/projects/deathtrap-dungeon/main-menu.png)
+![Deathtrap Dungeon main menu screen with controls shown.](../../images/projects/deathtrap-dungeon/main-menu.png)
 
 ### Gameplay: Platforming + Hazards
-![Gameplay screenshot showing platforms, spikes, and a collectible.](/images/projects/deathtrap-dungeon/gameplay-1.png)
+![Gameplay screenshot showing platforms, spikes, and a collectible.](../../images/projects/deathtrap-dungeon/gameplay-1.png)
 
 ### Gameplay: Level Progression
-![Gameplay screenshot showing corridor hazards, platforms, and checkpoint flag.](/images/projects/deathtrap-dungeon/gameplay-2.png)
+![Gameplay screenshot showing corridor hazards, platforms, and checkpoint flag.](../../images/projects/deathtrap-dungeon/gameplay-2.png)
 
 ---
 

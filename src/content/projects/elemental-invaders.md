@@ -86,7 +86,7 @@ This project taught me a lot about the realities of collaborative development:
 ## Gallery
 
 ### Title Screen
-![Elemental Invaders title screen showing menu options.](/images/projects/elemental-invaders/title-screen.png)
+![Elemental Invaders title screen showing menu options.](../../images/projects/elemental-invaders/title-screen.png)
 
 ### Gameplay
-![Gameplay screenshot showing the player ship, invaders, and HUD elements.](/images/projects/elemental-invaders/gameplay.png)
+![Gameplay screenshot showing the player ship, invaders, and HUD elements.](../../images/projects/elemental-invaders/gameplay.png)

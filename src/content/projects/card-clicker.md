@@ -105,13 +105,13 @@ Each screen is shown below.
 ## Gallery
 
 ### Main Screen (Clicking + Core Info)
-![Card Clicker main screen showing chip counters, hand stats, and click button.](/images/projects/card-clicker/main-screen.png)
+![Card Clicker main screen showing chip counters, hand stats, and click button.](../../images/projects/card-clicker/main-screen.png)
 
 ### Inventory Screen (Slot Management)
-![Card Clicker inventory screen showing card slot selection and back navigation.](/images/projects/card-clicker/inventory-screen.png)
+![Card Clicker inventory screen showing card slot selection and back navigation.](../../images/projects/card-clicker/inventory-screen.png)
 
 ### Upgrades Screen (Upgrade Purchases)
-![Card Clicker upgrades screen showing card value/suit upgrades, slot upgrades, and costs.](/images/projects/card-clicker/upgrades-screen.png)
+![Card Clicker upgrades screen showing card value/suit upgrades, slot upgrades, and costs.](../../images/projects/card-clicker/upgrades-screen.png)
 
 ---
 
