@@ -7,6 +7,16 @@ role: Level Designer / Gameplay Designer
 engine: Unity
 summary: A 2D platformer built as my first Unity project, featuring two levels, collectibles, bounce pads, multiple enemy types, and simple key/door progression mechanics.
 coverImage: /images/projects/deathtrap-dungeon/main-menu.png
+gallery:
+  - src: /images/projects/deathtrap-dungeon/main-menu.png
+    alt: Deathtrap Dungeon main menu screen showing the title and controls.
+    caption: Main menu
+  - src: /images/projects/deathtrap-dungeon/gameplay-1.png
+    alt: Gameplay screenshot showing platforms, hazards, and a collectible.
+    caption: Platforming + hazards
+  - src: /images/projects/deathtrap-dungeon/gameplay-2.png
+    alt: Gameplay screenshot showing level progression, hazards, and a checkpoint flag.
+    caption: Level progression
 ---
 
 ## Overview
@@ -78,19 +88,6 @@ Coins were collectable and displayed between levels, but they didn’t have an a
 - adding a shop system (health refill, checkpoint, upgrades)
 - unlocking cosmetic changes or bonus challenges
 - tying coins into scoring/leaderboards
-
----
-
-## Gallery
-
-### Main Menu
-![Deathtrap Dungeon main menu screen with controls shown.](../../images/projects/deathtrap-dungeon/main-menu.png)
-
-### Gameplay: Platforming + Hazards
-![Gameplay screenshot showing platforms, spikes, and a collectible.](../../images/projects/deathtrap-dungeon/gameplay-1.png)
-
-### Gameplay: Level Progression
-![Gameplay screenshot showing corridor hazards, platforms, and checkpoint flag.](../../images/projects/deathtrap-dungeon/gameplay-2.png)
 
 ---
 

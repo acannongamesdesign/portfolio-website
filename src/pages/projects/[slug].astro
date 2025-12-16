@@ -11,6 +11,8 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 	? import.meta.env.BASE_URL
 	: import.meta.env.BASE_URL + '/';
 
+const withBase = (path: any) => `${base}${String(path).replace(/^\/+/, '')}`;
+
 const projects = await getCollection('projects');
 const project = projects.find((p) => p.slug === Astro.params.slug);
 
@@ -54,6 +56,39 @@ const { Content } = await project.render();
 			<div class="mt-8 grid gap-8 lg:grid-cols-3">
 				<div class="lg:col-span-2 prose prose-invert max-w-none">
 					<Content />
+
+					{
+						project.data.gallery?.length ? (
+							<div class="not-prose mt-10">
+								<h2 class="text-xl font-semibold tracking-tight text-zinc-100">
+									Gallery
+								</h2>
+								<div class="mt-4 grid gap-4 sm:grid-cols-2">
+									{project.data.gallery.map((img) => (
+										<figure class="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20">
+											<a
+												href={withBase(img.src)}
+												target="_blank"
+												rel="noreferrer"
+											>
+												<img
+													src={withBase(img.src)}
+													alt={img.alt}
+													class="aspect-16/10 w-full object-cover transition-transform duration-300 hover:scale-[1.02]"
+													loading="lazy"
+												/>
+											</a>
+											{(img.caption || img.alt) && (
+												<figcaption class="border-t border-zinc-800 px-4 py-3 text-sm text-zinc-300">
+													{img.caption ?? img.alt}
+												</figcaption>
+											)}
+										</figure>
+									))}
+								</div>
+							</div>
+						) : null
+					}
 				</div>
 
 				<aside class="lg:col-span-1">
@@ -62,7 +97,7 @@ const { Content } = await project.render();
 					>
 						<div class="aspect-16/10 border-b border-zinc-800">
 							<img
-								src={`${base}${project.data.coverImage.replace(/^\/+/, '')}`}
+								src={withBase(project.data.coverImage)}
 								alt={`Screenshot from ${project.data.title}`}
 								class="h-full w-full object-cover"
 							/>

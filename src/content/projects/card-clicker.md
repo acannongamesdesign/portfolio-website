@@ -7,6 +7,16 @@ role: Gameplay Designer / UI/UX Designer / Programmer
 engine: Unity
 summary: A 2D clicker/idle game focused on readable UI/UX, where players earn chips using card-based stats and upgrade systems to improve progression.
 coverImage: /images/projects/card-clicker/main-screen.png
+gallery:
+  - src: /images/projects/card-clicker/main-screen.png
+    alt: Card Clicker main screen showing chip counters, hand stats, and click button.
+    caption: Main screen (clicking + core info)
+  - src: /images/projects/card-clicker/inventory-screen.png
+    alt: Card Clicker inventory screen showing card slot selection and back navigation.
+    caption: Inventory screen (slot management)
+  - src: /images/projects/card-clicker/upgrades-screen.png
+    alt: Card Clicker upgrades screen showing upgrade purchases and costs.
+    caption: Upgrades screen
 ---
 
 ## Overview
@@ -99,19 +109,6 @@ The game uses three distinct screens to keep information clear and prevent clutt
 3. **Upgrades Screen** – purchase upgrades and improve chip generation  
 
 Each screen is shown below.
-
----
-
-## Gallery
-
-### Main Screen (Clicking + Core Info)
-![Card Clicker main screen showing chip counters, hand stats, and click button.](../../images/projects/card-clicker/main-screen.png)
-
-### Inventory Screen (Slot Management)
-![Card Clicker inventory screen showing card slot selection and back navigation.](../../images/projects/card-clicker/inventory-screen.png)
-
-### Upgrades Screen (Upgrade Purchases)
-![Card Clicker upgrades screen showing card value/suit upgrades, slot upgrades, and costs.](../../images/projects/card-clicker/upgrades-screen.png)
 
 ---
 

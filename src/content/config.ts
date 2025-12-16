@@ -11,6 +11,16 @@ const projects = defineCollection({
 		engine: z.string(),
 		summary: z.string(),
 		coverImage: z.string(),
+
+		gallery: z
+			.array(
+				z.object({
+					src: z.string(),
+					alt: z.string(),
+					caption: z.string().optional(),
+				})
+			)
+			.optional(),
 	}),
 });
 

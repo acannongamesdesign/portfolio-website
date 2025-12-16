@@ -7,6 +7,13 @@ role: Artist / Gameplay Designer
 engine: Unreal Engine
 summary: A 3D arcade shoot ’em up inspired by Space Invaders, featuring an element counter system that rewards smart switching and adaptation.
 coverImage: /images/projects/elemental-invaders/title-screen.png
+gallery:
+  - src: /images/projects/elemental-invaders/title-screen.png
+    alt: Elemental Invaders title screen with menu options.
+    caption: Title screen
+  - src: /images/projects/elemental-invaders/gameplay.png
+    alt: Gameplay screenshot showing the player ship, invaders, and HUD elements.
+    caption: Gameplay
 ---
 
 ## Overview
@@ -80,13 +87,3 @@ This project taught me a lot about the realities of collaborative development:
 - Clear communication and support are critical to keep progress moving
 - Iteration based on feedback can significantly improve player understanding
 - The final output is often **worth the struggle**, and the experience improved my confidence in team-based game development
-
----
-
-## Gallery
-
-### Title Screen
-![Elemental Invaders title screen showing menu options.](../../images/projects/elemental-invaders/title-screen.png)
-
-### Gameplay
-![Gameplay screenshot showing the player ship, invaders, and HUD elements.](../../images/projects/elemental-invaders/gameplay.png)
